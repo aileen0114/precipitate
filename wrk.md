@@ -131,3 +131,68 @@ end
 1. 执行wrk的机器需要有充足的临时端口号，并且能快速回收关闭的socket。需要保证listen(2)的backlog参数大于并发连接数量。（注：listen(2)的backlog参数，https://m.newsmth.net/article/LinuxDev/27088?p=1）
 2. 通过脚本只改变请求的方法、路径、请求头、请求体，对性能没有影响。但是其他预处理行为，尤其是创建新的HTTP请求或使用response()方法，将必然影响到产生的负载。
 3. 线程数不宜过多，建议为核数的2到4倍. 多了反而因为线程切换过多造成效率降低。因为wrk不是使用每个连接一个线程的模型,而是通过异步网络IO提升并发量.所以网络通信不会阻塞线程执行。
+
+
+## 系统自带的高性能 I/O 机制参考
+
+- Linux IO模式及 select、poll、epoll详解（含部分实例源码）
+
+  https://zhuanlan.zhihu.com/p/148972109
+
+  再谈select, iocp, epoll,kqueue及各种I/O复用机制
+
+  https://blog.csdn.net/shallwake/article/details/5265287
+
+  五种IO模型（详解+形象例子说明）
+
+  https://blog.csdn.net/ZWE7616175/article/details/80591587
+
+  
+
+- epoll原理详解及epoll反应堆模型
+
+  https://blog.csdn.net/daaikuaichuan/article/details/83862311
+
+  epoll使用详解（精髓）
+
+  https://blog.csdn.net/ljx0305/article/details/4065058
+
+  如果这篇文章说不清epoll的本质，那就过来掐死我吧！(1).(2).(3)
+
+  https://zhuanlan.zhihu.com/p/63179839
+
+  从linux源码看epoll
+
+  https://my.oschina.net/alchemystar/blog/3008840
+
+  
+
+- select用法&原理详解（源码剖析）
+
+  https://blog.csdn.net/zhougb3/article/details/79792089
+
+  细谈select函数（C语言）
+
+  https://blog.csdn.net/piaojun_pj/article/details/5991968
+
+  linux select函数详解
+
+  https://blog.csdn.net/lingfengtengfei/article/details/12392449
+
+  IO多路复用之select全面总结(必看篇)
+
+  https://www.jb51.net/article/101057.htm
+
+  
+
+- 可扩展的事件复用技术：epoll和kqueue
+
+  https://www.cnblogs.com/moonz-wu/p/4740908.html
+
+  kqueue教程
+
+  http://wiki.netbsd.org/tutorials/kqueue_tutorial/#index1h1
+
+  FreeBSD Kqueue的实现原理
+
+  https://blog.csdn.net/mumumuwudi/article/details/47145801
